@@ -45,7 +45,7 @@ public class KeyPair {
         pkey = new PublicKey(n, e);
 	}
 	
-	//TODO GRAU: change readSk & readPk to static (?)
+
 	public void readKeypair() throws IOException {
 		String skStr = fileService.readSk();
 		skStr = skStr.substring(1, skStr.length() - 1);
