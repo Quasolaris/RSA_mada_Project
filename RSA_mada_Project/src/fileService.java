@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class fileService implements Key {
     
     //-----------------------Attributes-----------------------
-    private File skFile = new File("src/sk.txt");
-    private File pkFile = new File("src/pk.txt");
+    private static File skFile = new File("src/sk.txt");
+    private static File pkFile = new File("src/pk.txt");
     
     
     //----------------------Constructors----------------------
@@ -19,7 +19,7 @@ public class fileService implements Key {
     
     //-------------------------Methods------------------------
     
-        public String readSk() throws FileNotFoundException {
+        public static String readSk() throws FileNotFoundException {
             
             
             Scanner sc = new Scanner(skFile); 
@@ -27,7 +27,7 @@ public class fileService implements Key {
             return sc.nextLine(); 
         }
         
-        public String readPk() throws FileNotFoundException {
+        public static String readPk() throws FileNotFoundException {
                 
                
                 Scanner sc = new Scanner(pkFile); 
@@ -35,15 +35,15 @@ public class fileService implements Key {
                 return sc.nextLine();  
             }
         
-        public String readFile(String fileName) throws FileNotFoundException {
+        public static String readFile(String fileName) throws FileNotFoundException {
             
             
-            Scanner sc = new Scanner(new File(fileName)); 
+            Scanner sc = new Scanner(new File("src/" + fileName)); 
           
             return sc.nextLine(); 
         }
 
-        public boolean writeSk(String key) throws IOException {
+        public static boolean writeSk(String key) throws IOException {
             
             BufferedWriter bw = new BufferedWriter(new FileWriter(skFile));
             bw.write(key);
@@ -52,7 +52,7 @@ public class fileService implements Key {
             return true;
         }
         
-        public boolean writePk(String key) throws IOException {
+        public static boolean writePk(String key) throws IOException {
                 
                 BufferedWriter bw = new BufferedWriter(new FileWriter(pkFile));
                 bw.write(key);
@@ -62,9 +62,9 @@ public class fileService implements Key {
                 return true;
             }
         
-        public boolean writeFile(String fileName, String text) throws IOException {
+        public static boolean writeFile(String fileName, String text) throws IOException {
             
-            BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/" + fileName));
             bw.write(text);
             bw.close();
             
@@ -72,12 +72,7 @@ public class fileService implements Key {
             return true;
         }
         
-        public int[] getKeyValues(String fileName) {
-            
-            int[] values = new int[2];
-            String key = readFile(fileName);
-            
-        }
+       
    }
   
 

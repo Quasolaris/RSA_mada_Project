@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.*;
 import java.util.*;
 
@@ -44,7 +46,7 @@ public class KeyPair {
 	}
 	
 	//TODO GRAU: change readSk & readPk to static (?)
-	public void readKeypair() {
+	public void readKeypair() throws IOException {
 		String skStr = fileService.readSk();
 		skStr = skStr.substring(1, skStr.length() - 1);
 		String[] skArr = skStr.split(",");
