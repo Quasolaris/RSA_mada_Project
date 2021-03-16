@@ -13,11 +13,15 @@ public class fileService implements Key {
     
     
     //----------------------Constructors----------------------
+    //TODO GRAU: (?) Why Object and not Class || Explain pls, i wanna know why
     fileService() {
  
     }
     
     //-------------------------Methods------------------------
+    //TODO GRAU: Exception Handler for empty files -> should return empty String
+    //TODO GRAU: Code Structure, clean up the tabs :P
+    //TODO GRAU: Comments, even if obvious
     
         public static String readSk() throws FileNotFoundException {
             

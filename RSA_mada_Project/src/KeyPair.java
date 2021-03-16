@@ -45,18 +45,28 @@ public class KeyPair {
         pkey = new PublicKey(n, e);
 	}
 	
-
-	public void readKeypair() throws IOException {
+	//reads Keypair from existing file if they are not empty
+	public void readKeyPair() throws IOException {
 		String skStr = fileService.readSk();
-		skStr = skStr.substring(1, skStr.length() - 1);
-		String[] skArr = skStr.split(",");
-		skey = new SecureKey(new BigInteger(skArr[0]), new BigInteger(skArr[1]));
+		if(skStr !="") {
+			skStr = skStr.substring(1, skStr.length() - 1);
+			String[] skArr = skStr.split(",");
+			skey = new SecureKey(new BigInteger(skArr[0]), new BigInteger(skArr[1]));
+		}
 		
 		String pkStr = fileService.readPk();
-		pkStr = pkStr.substring(1, skStr.length() - 1);
-		String[] pkArr = skStr.split(",");
-		pkey = new PublicKey(new BigInteger(pkArr[0]), new BigInteger(pkArr[1]));
-	}	
+		if(pkStr != "") {
+			pkStr = pkStr.substring(1, skStr.length() - 1);
+			String[] pkArr = skStr.split(",");
+			pkey = new PublicKey(new BigInteger(pkArr[0]), new BigInteger(pkArr[1]));
+		}
+	}
+	
+	//save keys to file
+	public void writeKeyPair() throws IOException {
+		fileService.writeSk(skey.toString());
+		fileService.writePk(pkey.toString());
+	}
 
 	public String encrypt(String message) {
 		return pkey.encrypt(message);
