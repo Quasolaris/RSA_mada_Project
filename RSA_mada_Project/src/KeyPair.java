@@ -3,8 +3,8 @@ import java.util.*;
 
 public class KeyPair {
 	//====================Attributes=================
-	SecureKey skey;
-	PublicKey pkey;
+	private SecureKey skey;
+	private PublicKey pkey;
 	private int maxLen = 1024; 
 	
 	//====================C'tors=====================
@@ -43,9 +43,17 @@ public class KeyPair {
         pkey = new PublicKey(n, e);
 	}
 	
-	//TODO GRAU: Read Key-Values from sk.txt and pk.txt
+	//TODO GRAU: change readSk & readPk to static (?)
 	public void readKeypair() {
+		String skStr = fileService.readSk();
+		skStr = skStr.substring(1, skStr.length() - 1);
+		String[] skArr = skStr.split(",");
+		skey = new SecureKey(new BigInteger(skArr[0]), new BigInteger(skArr[1]));
 		
+		String pkStr = fileService.readPk();
+		pkStr = pkStr.substring(1, skStr.length() - 1);
+		String[] pkArr = skStr.split(",");
+		pkey = new PublicKey(new BigInteger(pkArr[0]), new BigInteger(pkArr[1]));
 	}	
 
 	public String encrypt(String message) {
