@@ -1,3 +1,8 @@
 /fileService.class
 /main_RSA.class
 /key.class
+/keypair.class
+/Key.class
+/Keypair.class
+/SecureKey.class
+/PublicKey.class
