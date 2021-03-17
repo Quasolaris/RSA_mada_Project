@@ -17,8 +17,14 @@ public class KeyPair {
 	//====================Methods====================
 	
 	public void generate() {
+	    /*
+         * This function is based on a code snippet from the following website:
+         * https://www.thejavaprogrammer.com/rsa-algorithm-in-java/
+         */
 		Random rand = new Random();
-		
+		BigInteger one = BigInteger.ONE;
+        BigInteger zero = BigInteger.ZERO;
+        
 		// initialise p & q as random Primes
 		BigInteger p = BigInteger.probablePrime(maxLen, rand);
 		BigInteger q = BigInteger.probablePrime(maxLen, rand);
@@ -30,8 +36,16 @@ public class KeyPair {
 		
 		// calculate n
 		BigInteger n = p.multiply(q);
+
+		BigInteger PHI = (p.subtract(one)).multiply((q.subtract(one)));
+        BigInteger e = BigInteger.probablePrime(maxLen / 2, rand);
+        
+        while (PHI.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(PHI) < 0)
+        {
+            e.add(BigInteger.ONE);
+        }
 		
-		BigInteger e = BigInteger.probablePrime(maxLen / 2, rand);
+		
 		/*
 		// determine e & d
 		//TODO BOTH: re-do determination of e & d because of copyright
@@ -43,41 +57,11 @@ public class KeyPair {
         }
         BigInteger d = e.modInverse(PHI);
         */
-		
-		
-		//----------------------New Algorithms------------------------
-		//Euklid algorithm
-		BigInteger one = BigInteger.ONE;
-		BigInteger zero = BigInteger.ONE;
-		
-		
-		BigInteger a = (p.subtract(one)).multiply((q.subtract(one))), b = e, x0 = one,
-		        y0 = zero, x1 = zero, y1 = one, q2 = zero, r = zero, 
-		        tempX0, tempY0, tempX1, tempY1;
-		
-        while(b.intValue() != 0) {
-
-            tempX1 = x1;
-            tempY1 = y1;
-            tempX0 = x0;
-            tempY0 = y0;
-
-            q2 = a.divide(b);
-            r = a.mod(b);
-
-            x0 = x1;
-            y0 = y1;
-            x1 = tempX0.subtract(q2.multiply(tempX1));
-            y1 = tempY0.subtract(q2.multiply(tempY1));
-
-            a = b;
-            b = r;
-        }
         
         //Set d
-        BigInteger d = y0;
+        BigInteger d = euklid(e, PHI);
         
-        // populate KeyPair
+        //Populate KeyPair
         skey = new SecureKey(n, d);
         pkey = new PublicKey(n, e);
 	}
@@ -111,5 +95,34 @@ public class KeyPair {
 
 	public String decrypt(String cipher) {
 		return skey.decrypt(cipher);
+	}
+	
+	//Euklid algorithm
+	private BigInteger euklid(BigInteger e, BigInteger PHI) {
+	    BigInteger one = BigInteger.ONE; 
+        BigInteger zero = BigInteger.ZERO;
+	    BigInteger a = PHI, b = e, x0 = one,
+                    y0 = zero, x1 = zero, y1 = one, q2 = zero, r = zero, 
+                        tempX0, tempY0, tempX1, tempY1;
+        
+        while(b.intValue() != 0) {
+
+            tempX1 = x1;
+            tempY1 = y1;
+            tempX0 = x0;
+            tempY0 = y0;
+
+            q2 = a.divide(b);
+            r = a.mod(b);
+            
+            a = b;
+            b = r;
+            
+            x0 = x1;
+            y0 = y1;
+            x1 = tempX0.subtract(q2.multiply(tempX1));
+            y1 = tempY0.subtract(q2.multiply(tempY1));
+        }
+	    return y0;
 	}
 }
