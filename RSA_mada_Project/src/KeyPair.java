@@ -51,14 +51,14 @@ public class KeyPair {
 		if(skStr !="") {
 			skStr = skStr.substring(1, skStr.length() - 1);
 			String[] skArr = skStr.split(",");
-			skey = new SecureKey(new BigInteger(skArr[0]), new BigInteger(skArr[1]));
+			skey = new SecureKey(new BigInteger(skArr[0].trim()), new BigInteger(skArr[1].trim()));
 		}
 		
 		String pkStr = fileService.readPk();
 		if(pkStr != "") {
-			pkStr = pkStr.substring(1, skStr.length() - 1);
+			pkStr = pkStr.substring(1, pkStr.length() - 1);
 			String[] pkArr = skStr.split(",");
-			pkey = new PublicKey(new BigInteger(pkArr[0]), new BigInteger(pkArr[1]));
+			pkey = new PublicKey(new BigInteger(pkArr[0].trim()), new BigInteger(pkArr[1].trim()));
 		}
 	}
 	
