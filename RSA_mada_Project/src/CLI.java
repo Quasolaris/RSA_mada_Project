@@ -1,6 +1,5 @@
 
 public class CLI {
-    //TODO GRAU: make CLI 
     
     public static void run() {
         
@@ -8,7 +7,6 @@ public class CLI {
         KeyPair keys = new KeyPair();
         String encryptText, decryptText;
         
-        /*
         //Test with chiffre and sk from AD files
         printLine();
         System.out.println("Chiffre encrypt test");
@@ -19,7 +17,7 @@ public class CLI {
         System.out.println("Content of test_chiffre.txt saved in temp string");
         printNewLine();
         
-        System.out.println("Decryptng test_chiffre.txt...");
+        System.out.println("Decrypting test_chiffre.txt...");
         fileService.writeSk(fileService.readFile("test_sk.txt"));
         //Read keys and decrypt
         keys.readKeyPair();
@@ -28,9 +26,9 @@ public class CLI {
         printNewLine();
         System.out.println("Text of file: " + decryptText);
         printNewLine();
-        System.err.println("Test done, starting tasks...");
+        System.out.println("Test done, starting tasks...");
         printLine();
-        */
+        
         
         //Task 1
         printLine();
@@ -86,7 +84,7 @@ public class CLI {
         System.out.println("Content of text-d.txt saved in temp string!");
         printNewLine();
         
-        System.out.println("Decryptng text-d.txt...");
+        System.out.println("Decrypting text-d.txt...");
         fileService.writeSk(fileService.readFile("sk.txt"));
         
         //Reading keys and decrypting file
@@ -96,7 +94,7 @@ public class CLI {
         printNewLine();
         System.out.println("Text of file: " + decryptText);
         printNewLine();
-        System.err.println("Test done, starting tasks...");
+        System.out.println("Tasks completed.");
         printLine();
         
         

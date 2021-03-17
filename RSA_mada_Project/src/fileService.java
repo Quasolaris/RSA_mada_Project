@@ -13,7 +13,6 @@ public class fileService implements Key {
     private static String pkFile = "pk.txt";
 
     //-------------------------Methods------------------------
-    //TODO GRAU: Exception Handler for empty files -> should return empty String
     	
 	// read secure key from file
     public static String readSk(String skFile) {

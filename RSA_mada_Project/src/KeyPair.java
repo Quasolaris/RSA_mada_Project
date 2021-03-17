@@ -32,7 +32,8 @@ public class KeyPair {
 		BigInteger n = p.multiply(q);
 		
 		// determine e & d
-		BigInteger PHI = p.subtract(BigInteger.ONE).multiply(  q.subtract(BigInteger.ONE));
+		//TODO BOTH: re-do determination of e & d because of copyright
+		BigInteger PHI = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
 		BigInteger e = BigInteger.probablePrime(maxLen / 2, rand);
         while (PHI.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(PHI) < 0)
         {
@@ -75,6 +76,4 @@ public class KeyPair {
 	public String decrypt(String cipher) {
 		return skey.decrypt(cipher);
 	}
-	//TODO ROTH: merge quickPOW from SecureKey/PrivateKey
-	
 }
