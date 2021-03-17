@@ -31,6 +31,8 @@ public class KeyPair {
 		// calculate n
 		BigInteger n = p.multiply(q);
 		
+		BigInteger e = BigInteger.probablePrime(maxLen / 2, rand);
+		/*
 		// determine e & d
 		//TODO BOTH: re-do determination of e & d because of copyright
 		BigInteger PHI = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
@@ -40,6 +42,40 @@ public class KeyPair {
             e.add(BigInteger.ONE);
         }
         BigInteger d = e.modInverse(PHI);
+        */
+		
+		
+		//----------------------New Algorithms------------------------
+		//Euklid algorithm
+		BigInteger one = BigInteger.ONE;
+		BigInteger zero = BigInteger.ONE;
+		
+		
+		BigInteger a = (p.subtract(one)).multiply((q.subtract(one))), b = e, x0 = one,
+		        y0 = zero, x1 = zero, y1 = one, q2 = zero, r = zero, 
+		        tempX0, tempY0, tempX1, tempY1;
+		
+        while(b.intValue() != 0) {
+
+            tempX1 = x1;
+            tempY1 = y1;
+            tempX0 = x0;
+            tempY0 = y0;
+
+            q2 = a.divide(b);
+            r = a.mod(b);
+
+            x0 = x1;
+            y0 = y1;
+            x1 = tempX0.subtract(q2.multiply(tempX1));
+            y1 = tempY0.subtract(q2.multiply(tempY1));
+
+            a = b;
+            b = r;
+        }
+        
+        //Set d
+        BigInteger d = y0;
         
         // populate KeyPair
         skey = new SecureKey(n, d);
