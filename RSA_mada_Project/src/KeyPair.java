@@ -46,7 +46,7 @@ public class KeyPair {
 	}
 	
 	//reads Keypair from existing file if they are not empty
-	public void readKeyPair() throws IOException {
+	public void readKeyPair() {
 		String skStr = fileService.readSk();
 		if(skStr !="") {
 			skStr = skStr.substring(1, skStr.length() - 1);
@@ -63,7 +63,7 @@ public class KeyPair {
 	}
 	
 	//save keys to file
-	public void writeKeyPair() throws IOException {
+	public void writeKeyPair() {
 		fileService.writeSk(skey.toString());
 		fileService.writePk(pkey.toString());
 	}
