@@ -1,27 +1,26 @@
-
 public class CLI {
     
     public static void run() {
         
-        //init
+        // init
         KeyPair keys = new KeyPair();
         String encryptText, decryptText;
         
-        //Test with chiffre and sk from AD files
+        // Test with chiffre and sk from AD files
         printLineThick();
         System.out.println("Chiffre encrypt test");
         System.out.println("Opening test_chiffre.txt file");
         printLineThick();
         printNewLine();
         
-        //Reading file
+        // Reading file
         encryptText = fileService.readFile("test_chiffre.txt");
         System.out.println("Content of test_chiffre.txt saved in temp string");
         printNewLine();
         
         System.out.println("Decrypting test_chiffre.txt...");
         fileService.writeSk(fileService.readFile("test_sk.txt"));
-        //Read keys and decrypt
+        // Read keys and decrypt
         keys.readKeyPair();
         decryptText = keys.decrypt(encryptText);
         System.out.println("test_chiffre.txt decrypted!");
@@ -32,7 +31,7 @@ public class CLI {
         
         
         
-        //Task 1
+        // Task 1
         printNewLine();
         printLineThick();
         System.out.println("Task 1:");
@@ -40,12 +39,12 @@ public class CLI {
         printLineThick();
         printNewLine();
         
-        //generating keys
+        // generating keys
         System.out.println("Generates keys...");
         keys.generate();
         System.out.println("Keys generated!");
         
-        //Saving keys to sk.txt and pk.txt
+        // Saving keys to sk.txt and pk.txt
         printNewLine();
         System.out.println("Saving keys into file: src/sk.txt and src/pk.txt");
         keys.writeKeyPair();
@@ -55,7 +54,7 @@ public class CLI {
         System.out.println("Task 1 finished!");
         
                 
-        //Task 2
+        // Task 2
         printNewLine();
         printLineThick();
         System.out.println("Task 2:");
@@ -63,13 +62,13 @@ public class CLI {
         printLineThick();
         printNewLine();
         
-        //Encrypting text.txt
+        // Encrypting text.txt
         System.out.println("Encrypting content of text.txt...");
         encryptText = keys.encrypt(fileService.readFile("text.txt"));
         System.out.println("Text encrypted!");
         printNewLine();
         
-        //Saving encrypted text into file chiffre.txt
+        // Saving encrypted text into file chiffre.txt
         System.out.println("Saving encrypted content into file text-d.txt");
         fileService.writeFile("text-d.txt", encryptText);
         System.out.println("Content saved!");
@@ -77,7 +76,7 @@ public class CLI {
         
         System.out.println("Task 2 finished!");
         
-        //Task 3
+        // Task 3
         printNewLine();
         printLineThick();
         System.out.println("Task 3");
@@ -85,7 +84,7 @@ public class CLI {
         printLineThick();
         printNewLine();
         
-        //Readig file
+        // Readig file
         encryptText = fileService.readFile("text-d.txt");
         System.out.println("Content of text-d.txt saved in temp string!");
         printNewLine();
@@ -93,7 +92,7 @@ public class CLI {
         System.out.println("Decrypting text-d.txt...");
         fileService.writeSk(fileService.readFile("sk.txt"));
         
-        //Reading keys and decrypting file
+        // Reading keys and decrypting file
         keys.readKeyPair();
         decryptText = keys.decrypt(encryptText);
         System.out.println("text-d.txt decrypted!");
@@ -107,18 +106,12 @@ public class CLI {
         
     }
     
-    
-    //Prints line in console
-    private static void printLine() {
-        System.out.println("--------------------------------------");
-    }
-    
-    //Prints thick line to console
+    // Prints thick line to console
     private static void printLineThick() {
         System.out.println("======================================");
     }
     
-    //Prints a new line in console
+    // Prints a new line in console
     private static void printNewLine() {
         System.out.println();
     }

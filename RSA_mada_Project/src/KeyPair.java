@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.math.*;
 import java.util.*;
 
@@ -7,7 +5,7 @@ public class KeyPair {
 	//====================Attributes=================
 	private SecureKey skey;
 	private PublicKey pkey;
-	private int maxLen = 8; 
+	private int maxLen = 1024; 
 	private static BigInteger one = BigInteger.ONE;
 	private static BigInteger zero = BigInteger.ZERO; 
 	private static BigInteger x0 = one;
@@ -22,8 +20,8 @@ public class KeyPair {
 	
 	public void generate() {
 	    /*
-         * This function is based on a code snippet from the following website:
-         * https://www.thejavaprogrammer.com/rsa-algorithm-in-java/
+         *  This function is based on a code snippet from the following Website:
+         *  https://www.thejavaprogrammer.com/rsa-algorithm-in-java/
          */
 		Random rand = new Random();
 		
@@ -36,29 +34,35 @@ public class KeyPair {
 		while(p.equals(q)) {
 			q = BigInteger.probablePrime(maxLen, rand);
 		}
-		System.err.println("p: " + p + "| q: " + q);
+
 		// calculate n
 		BigInteger n = p.multiply(q);
-
+		
+		// init PHI and e
 		BigInteger PHI = (p.subtract(one)).multiply((q.subtract(one)));
 		BigInteger e = one;
         
-		while(PHI.multiply(x0).add(y0.multiply(e)).intValue() != 1) {
+		// generate a valid e and d
+		while(PHI.multiply(x0).add(y0.multiply(e)).intValue() != 1 || y0.compareTo(zero) == -1) {
+			
+			// generate a valid e
 			e = BigInteger.probablePrime(maxLen / 2, rand);
-	        while (PHI.gcd(e).compareTo(one) > 0 && e.compareTo(PHI) < 0)
+			while (PHI.gcd(e).compareTo(one) > 0 && e.compareTo(PHI) < 0)
 	        {
 	            e.add(one);
 	        }
-	        euklid(e, PHI);
+			
+			// generate a d
+	        euklid(PHI, e);
 		}
 		BigInteger d = y0;
         
-        //Populate KeyPair
+        // Populate KeyPair
         skey = new SecureKey(n, d);
         pkey = new PublicKey(n, e);
 	}
 	
-	//reads Keypair from existing file if they are not empty
+	// reads Keypair from existing file if they are not empty
 	public void readKeyPair() {
 		String skStr = fileService.readSk();
 		if(skStr !="") {
@@ -75,32 +79,34 @@ public class KeyPair {
 		}
 	}
 	
-	//save keys to file
+	// save keys to file
 	public void writeKeyPair() {
 		fileService.writeSk(skey.toString());
 		fileService.writePk(pkey.toString());
 	}
-
+	
+	// encrypt a cipher text with the public key
 	public String encrypt(String message) {
 		return pkey.encrypt(message);
 	}
-
+	
+	// decrypt a cipher text with the secure key
 	public String decrypt(String cipher) {
 		return skey.decrypt(cipher);
 	}
 	
-	//Euklid algorithm
-	private void euklid(BigInteger e, BigInteger PHI) {
+	// euklid algorithm (to replace BigInteger.modInverse())
+	private void euklid(BigInteger PHI, BigInteger e) {
 	    BigInteger a = PHI, b = e, x1 = zero, y1 = one, q2 = zero, r = zero, 
                         tempX0, tempY0, tempX1, tempY1;
-	    
-	    System.err.println("a: " + a + "| b: " + b);
+	    y0 = zero;
+	    x0 = one;
 	    if(a.compareTo(b) <= 0) {
 	    	a = e;
 	    	b = PHI;
 	    }
         
-        while(b.intValue() != 0) {
+        while(b.compareTo(zero) > 0) {
             tempX1 = x1;
             tempY1 = y1;
             tempX0 = x0;
@@ -117,6 +123,5 @@ public class KeyPair {
             x1 = tempX0.subtract(q2.multiply(tempX1));
             y1 = tempY0.subtract(q2.multiply(tempY1));
         }
-        System.err.println("y0: " + y0 + "| x0: " + x0);
 	}
 }
