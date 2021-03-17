@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class fileService implements Key {
     
     //-----------------------Attributes-----------------------
-    private static File skFile = new File("src/sk.txt");
-    private static File pkFile = new File("src/pk.txt");
+    private static String skFile = "sk.txt";
+    private static String pkFile = "pk.txt";
     
     
     //----------------------Constructors----------------------
@@ -20,64 +20,69 @@ public class fileService implements Key {
     
     //-------------------------Methods------------------------
     //TODO GRAU: Exception Handler for empty files -> should return empty String
-    //TODO GRAU: Code Structure, clean up the tabs :P
-    //TODO GRAU: Fix Resource Leaks in Scanner
-    //TODO GRAU: Comments, even if obvious
+    	
+	// read secure key from file
+    public static String readSk(String skFile) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("src/" + skFile));
+        String content = sc.nextLine();
+        sc.close();
+        return content;
+    }
+    // default file path for readSk()
+    public static String readSk() throws FileNotFoundException {
+    	return readSk(skFile);
+    }
     
-        public static String readSk() throws FileNotFoundException {
-            
-            
-            Scanner sc = new Scanner(skFile); 
-          
-            return sc.nextLine(); 
-        }
+    // read public key from file
+    public static String readPk(File pkFile) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("src/" + pkFile));
+        String content = sc.nextLine();
+        sc.close();
+        return content;
+    }
+    // default file path for readPk()
+    public static String readPk() throws FileNotFoundException {
+    	return readSk(pkFile);
+    }
+    
+    // read from specified file
+    //TODO GRAU: do we want to read multiple lines? 
+    public static String readFile(String fileName) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("src/" + fileName));
+        String content = sc.nextLine();
+        sc.close();
+        return content; 
+    }
+    
+    // write secure key to standard file
+    public static boolean writeSk(String key) throws IOException {
         
-        public static String readPk() throws FileNotFoundException {
-                
-               
-                Scanner sc = new Scanner(pkFile); 
-              
-                return sc.nextLine();  
-            }
+        BufferedWriter bw = new BufferedWriter(new FileWriter(new File("src/" + skFile)));
+        bw.write(key);
+        bw.close();
         
-        public static String readFile(String fileName) throws FileNotFoundException {
-            
-            
-            Scanner sc = new Scanner(new File("src/" + fileName)); 
-          
-            return sc.nextLine(); 
-        }
-
-        public static boolean writeSk(String key) throws IOException {
-            
-            BufferedWriter bw = new BufferedWriter(new FileWriter(skFile));
-            bw.write(key);
-            bw.close();
-            
-            return true;
-        }
+        return true;
+    }
+    
+    // write public key to standard file
+    public static boolean writePk(String key) throws IOException {
         
-        public static boolean writePk(String key) throws IOException {
-                
-                BufferedWriter bw = new BufferedWriter(new FileWriter(pkFile));
-                bw.write(key);
-                bw.close();
-                
-
-                return true;
-            }
+        BufferedWriter bw = new BufferedWriter(new FileWriter(new File("src/" + pkFile)));
+        bw.write(key);
+        bw.close();
         
-        public static boolean writeFile(String fileName, String text) throws IOException {
-            
-            BufferedWriter bw = new BufferedWriter(new FileWriter("src/" + fileName));
-            bw.write(text);
-            bw.close();
-            
-
-            return true;
-        }
+        return true;
+    }
+    
+    // write custom text to a specified file within the source folder
+    public static boolean writeFile(String fileName, String text) throws IOException {
         
-       
-   }
+        BufferedWriter bw = new BufferedWriter(new FileWriter("src/" + fileName));
+        bw.write(text);
+        bw.close();
+        
+        return true;
+    }
+}
   
 
