@@ -8,9 +8,11 @@ public class CLI {
         String encryptText, decryptText;
         
         //Test with chiffre and sk from AD files
-        printLine();
+        printLineThick();
         System.out.println("Chiffre encrypt test");
         System.out.println("Opening test_chiffre.txt file");
+        printLineThick();
+        printNewLine();
         
         //Reading file
         encryptText = fileService.readFile("test_chiffre.txt");
@@ -27,14 +29,15 @@ public class CLI {
         System.out.println("Text of file: " + decryptText);
         printNewLine();
         System.out.println("Test done, starting tasks...");
-        printLine();
+        
         
         
         //Task 1
-        printLine();
+        printNewLine();
+        printLineThick();
         System.out.println("Task 1:");
         System.out.println("Generate secure and public key");
-        printLine();
+        printLineThick();
         printNewLine();
         
         //generating keys
@@ -50,13 +53,14 @@ public class CLI {
         printNewLine();
         
         System.out.println("Task 1 finished!");
-        printLine();
-        printNewLine();
         
+                
         //Task 2
+        printNewLine();
+        printLineThick();
         System.out.println("Task 2:");
         System.out.println("Encrypting text.txt with public key from task 1");
-        printLine();
+        printLineThick();
         printNewLine();
         
         //Encrypting text.txt
@@ -72,12 +76,14 @@ public class CLI {
         printNewLine();
         
         System.out.println("Task 2 finished!");
-        printLine();
         
         //Task 3
-        printLine();
+        printNewLine();
+        printLineThick();
         System.out.println("Task 3");
         System.out.println("Decrypting text-d.txt");
+        printLineThick();
+        printNewLine();
         
         //Readig file
         encryptText = fileService.readFile("text-d.txt");
@@ -94,8 +100,9 @@ public class CLI {
         printNewLine();
         System.out.println("Text of file: " + decryptText);
         printNewLine();
+        printLineThick();
         System.out.println("Tasks completed.");
-        printLine();
+        printLineThick();
         
         
     }
@@ -104,6 +111,11 @@ public class CLI {
     //Prints line in console
     private static void printLine() {
         System.out.println("--------------------------------------");
+    }
+    
+    //Prints thick line to console
+    private static void printLineThick() {
+        System.out.println("======================================");
     }
     
     //Prints a new line in console
