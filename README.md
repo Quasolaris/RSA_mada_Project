@@ -12,7 +12,7 @@ When CLI or any fileService mathods get called alot of times in a short time, an
 
 Fix on user site: Run fileService methods not in short amounts of time, let the stream close befor new read/write operation.
 
-## Changelog
+## Change log
 
 ------------------16.03.2021---------------------
 
@@ -42,3 +42,5 @@ Fix on user site: Run fileService methods not in short amounts of time, let the 
 + Formated README.md with md syntax
 
 ------------------18.03.2021---------------------
+
++ Merged feature/key into develop branch
