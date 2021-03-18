@@ -6,33 +6,7 @@ public class CLI {
         KeyPair keys = new KeyPair();
         String encryptText, decryptText;
         
-        // Test with chiffre and sk from AD files
-        printLineThick();
-        System.out.println("Chiffre encrypt test");
-        System.out.println("Opening test_chiffre.txt file");
-        printLineThick();
-        printNewLine();
-        
-        // Reading file
-        encryptText = fileService.readFile("test_chiffre.txt");
-        System.out.println("Content of test_chiffre.txt saved in temp string");
-        printNewLine();
-        
-        System.out.println("Decrypting test_chiffre.txt...");
-        fileService.writeSk(fileService.readFile("test_sk.txt"));
-        // Read keys and decrypt
-        keys.readKeyPair();
-        decryptText = keys.decrypt(encryptText);
-        System.out.println("test_chiffre.txt decrypted!");
-        printNewLine();
-        System.out.println("Text of file: " + decryptText);
-        printNewLine();
-        System.out.println("Test done, starting tasks...");
-        
-        
-        
         // Task 1
-        printNewLine();
         printLineThick();
         System.out.println("Task 1:");
         System.out.println("Generate secure and public key");
@@ -99,6 +73,36 @@ public class CLI {
         System.out.println("chiffre.txt decrypted!");
         printNewLine();
         System.out.println("Text of file: " + fileService.readFile("text-d.txt"));
+        printNewLine();
+        
+        System.out.println("Task 3 finished!");
+        
+        // Task 4
+        printNewLine();
+        printLineThick();
+        System.out.println("Task 4:");
+        System.out.println("Decrypting test_chiffre.txt file");
+        printLineThick();
+        printNewLine();
+        
+        // Reading file
+        encryptText = fileService.readFile("test_chiffre.txt");
+        System.out.println("Content of test_chiffre.txt saved in temp string");
+        printNewLine();
+        
+        System.out.println("Decrypting test_chiffre.txt...");
+        fileService.writeSk(fileService.readFile("test_sk.txt"));
+        // Read keys and decrypt
+        keys.readKeyPair();
+        decryptText = keys.decrypt(encryptText);
+        System.out.println("test_chiffre.txt decrypted!");
+        printNewLine();
+        System.out.println("Text of file: " + decryptText);
+        printNewLine();
+
+        System.out.println("Task 4 finished!");
+        
+        // Tasks Completed
         printNewLine();
         printLineThick();
         System.out.println("Tasks completed.");
