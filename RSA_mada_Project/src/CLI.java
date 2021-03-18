@@ -69,8 +69,8 @@ public class CLI {
         printNewLine();
         
         // Saving encrypted text into file chiffre.txt
-        System.out.println("Saving encrypted content into file text-d.txt");
-        fileService.writeFile("text-d.txt", encryptText);
+        System.out.println("Saving encrypted content into file chiffre.txt");
+        fileService.writeFile("chiffre.txt", encryptText);
         System.out.println("Content saved!");
         printNewLine();
         
@@ -80,24 +80,25 @@ public class CLI {
         printNewLine();
         printLineThick();
         System.out.println("Task 3");
-        System.out.println("Decrypting text-d.txt");
+        System.out.println("Decrypting chiffre.txt");
         printLineThick();
         printNewLine();
         
         // Readig file
-        encryptText = fileService.readFile("text-d.txt");
-        System.out.println("Content of text-d.txt saved in temp string!");
+        encryptText = fileService.readFile("chiffre.txt");
+        System.out.println("Content of chiffre.txt saved in temp string!");
         printNewLine();
         
-        System.out.println("Decrypting text-d.txt...");
+        System.out.println("Decrypting chiffre.txt...");
         fileService.writeSk(fileService.readFile("sk.txt"));
         
         // Reading keys and decrypting file
         keys.readKeyPair();
         decryptText = keys.decrypt(encryptText);
-        System.out.println("text-d.txt decrypted!");
+        fileService.writeFile("text-d.txt", decryptText);
+        System.out.println("chiffre.txt decrypted!");
         printNewLine();
-        System.out.println("Text of file: " + decryptText);
+        System.out.println("Text of file: " + fileService.readFile("text-d.txt"));
         printNewLine();
         printLineThick();
         System.out.println("Tasks completed.");

@@ -37,10 +37,15 @@ Fix on user site: Run fileService methods not in short amounts of time, let the 
 + fixed some minor bugs
 + added comments
 + cleand up comments
-+ run 400 tests, all successfull (see test in RSA_main)
++ run 100 tests, all successfull (see test in RSA_main)
 + updated changelog
 
 ------------------18.03.2021---------------------
 
 + Merged feature/key into develop branch
 + Formated README.md with md syntax
++ Added last bits for completion
++ Added new test for file handling
++ Run 400 tests, all successfull (see tests in RSA_main)
++ Checked tasks and if we did everything
++ Changed some filenames
