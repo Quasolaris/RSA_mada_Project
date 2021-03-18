@@ -8,7 +8,7 @@ Make own RSA encryption with key generation. Code should save files and keys and
 
 
 ## Known bugs
-### When CLI or any fileService mathods get called alot of times in a short time, an error occurs. The error is because the stream needs some time to close.
+### When CLI or any fileService methods get called alot of times in a short time, an error occurs. The error is because the stream needs some time to close.
 Fix on user site: Run fileService methods not in short amounts of time, let the stream close befor new read/write operation.
 
 ### Sometimes when the repository gets cloned, eclipse or any other IDE does not add the right JRE version (jdk-15), this seems to be a problem of our .gitignore file or is a IDE problem.
