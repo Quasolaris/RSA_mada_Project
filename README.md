@@ -12,6 +12,14 @@ When CLI or any fileService mathods get called alot of times in a short time, an
 
 Fix on user site: Run fileService methods not in short amounts of time, let the stream close befor new read/write operation.
 
+
+
+Sometimes when the repository gets cloned, eclipse or any other IDE does not add the right JRE version (jdk-15), this seems to be aproblem of our .gitignore file or is a IDE problem.
+
+Fix on user site: Manually add JRE version (jdk-8 upwards should work, tested is jdk-15.0.2)
+
+
+
 ## Change log
 
 ------------------16.03.2021---------------------
