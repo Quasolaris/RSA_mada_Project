@@ -10,8 +10,7 @@ Make own RSA encryption with key generation. Code should save files and keys and
 ## Known bugs
 When CLI or any fileService mathods get called alot of times in a short time, an error occurs. The error is because the stream needs some time to close.
 
-+Fix on user site
-  Run fileService methods not in short amounts of time, let the stream close befor new read/write operation.
+Fix on user site: Run fileService methods not in short amounts of time, let the stream close befor new read/write operation.
 
 ## Changelog
 
