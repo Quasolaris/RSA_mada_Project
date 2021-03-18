@@ -1,7 +1,5 @@
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -69,8 +67,6 @@ public class fileService implements Key {
     // write custom text to a specified file within the source folder
     public static boolean writeFile(String fileName, String text) {
         try {
-            //Bodge vom fiinste... bw überschribt zeiche, 
-            //sprich wenn neue key chürzer isch stimmt z format nümme
             PrintWriter writer = new PrintWriter("src/" + fileName);
             writer.print(text);
             writer.close();
