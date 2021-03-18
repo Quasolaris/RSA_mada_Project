@@ -13,6 +13,7 @@ Fix on user site: Run fileService methods not in short amounts of time, let the 
 
 ### Sometimes when the repository gets cloned, eclipse or any other IDE does not add the right JRE version (jdk-15), this seems to be a problem of our .gitignore file or is a IDE problem.
 Fix on user site: Manually add JRE version (jdk-8 upwards should work, tested is jdk-15.0.2)
+For full eclipse project to import it as normal project see: RSA_mada_Project/RSA_mada_Project_full_project.zip
 
 
 
@@ -53,3 +54,4 @@ Fix on user site: Manually add JRE version (jdk-8 upwards should work, tested is
 + Run 400 tests, all successfull (see tests in RSA_main)
 + Checked tasks and if we did everything
 + Changed some filenames
++ Added ZIP-file with full eclipse project
