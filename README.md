@@ -56,3 +56,4 @@ For full eclipse project to import it as normal project see: RSA_mada_Project/RS
 + Checked tasks and if we did everything
 + Changed some filenames
 + Added ZIP-file with full eclipse project
++ Tested code on different machines (2 systems no problem third had import problem with IDE)
