@@ -39,8 +39,8 @@ Fix on user site: Run fileService methods not in short amounts of time, let the 
 + cleand up comments
 + run 400 tests, all successfull (see test in RSA_main)
 + updated changelog
-+ Formated README.md with md syntax
 
 ------------------18.03.2021---------------------
 
 + Merged feature/key into develop branch
++ Formated README.md with md syntax
